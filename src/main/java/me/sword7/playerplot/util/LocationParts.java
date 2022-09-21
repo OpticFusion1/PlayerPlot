@@ -77,14 +77,14 @@ public class LocationParts {
     public boolean equals(Object o) {
         if (o instanceof Location) {
             Location l = (Location) o;
-            return this.worldName.equals(l.getWorld().getName()) && this.x == l.getX() &&
-                    this.y == l.getY() && this.z == l.getZ() && this.yaw == location.getYaw() &&
-                    this.pitch == location.getPitch();
+            return this.worldName.equals(l.getWorld().getName()) && this.x == l.getX()
+                    && this.y == l.getY() && this.z == l.getZ() && this.yaw == location.getYaw()
+                    && this.pitch == location.getPitch();
         } else if (o instanceof LocationParts) {
             LocationParts l = (LocationParts) o;
-            return this.worldName.equals(l.worldName) && this.x == l.x &&
-                    this.y == l.y && this.z == l.z &&
-                    this.yaw == l.yaw && this.pitch == l.pitch;
+            return this.worldName.equals(l.worldName) && this.x == l.x
+                    && this.y == l.y && this.z == l.z
+                    && this.yaw == l.yaw && this.pitch == l.pitch;
         } else {
             return super.equals(o);
         }
@@ -120,6 +120,5 @@ public class LocationParts {
             return null;
         }
     }
-
 
 }

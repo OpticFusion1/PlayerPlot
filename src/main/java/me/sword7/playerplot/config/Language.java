@@ -20,7 +20,6 @@ public enum Language {
     PLUGIN_AUTHOR("Plugin - author", "Author"),
     PLUGIN_VERSION("Plugin - version", "Version"),
     PLUGIN_RELOAD("Plugin - reload", "Reload complete."),
-
     LABEL_COMMANDS("Label - commands", "Commands"),
     LABEL_PLOTS("Label - plots", "Plots"),
     LABEL_FRIEND_PLOTS("Label - friend plots", "Friend Plots"),
@@ -40,7 +39,6 @@ public enum Language {
     LABEL_ALL_PLOTS("Label - all plots", "All Plots"),
     LABEL_CONFIRM("Label - confirm", "Confirm"),
     LABEL_CANCEL("Label - cancel", "Cancel"),
-
     HELP_PLAYERPLOT_HELP("Help - playerplot help", "show plugin commands"),
     HELP_PLAYERPLOT_INFO("Help - playerplot info", "get plugin information"),
     HELP_PLAYERPLOT_RELOAD("Help - playerplot reload", "reload config"),
@@ -62,15 +60,12 @@ public enum Language {
     HELP_WRITE_DEED("Help - writedeed", "write plot deeds"),
     HELP_ALL_PLOTS("Help - allplots", "view all plots"),
     HELP_DEL_PLOT("help - delplot", "delete any plot"),
-
     CONSOLE_DETECT("Console - plugin detected", "%plugin% detected"),
-
     ARG_AMOUNT("Arg - amount", "amount"),
     ARG_PLAYER("Arg - player", "player"),
     ARG_NAME("Arg - name", "name"),
     ARG_PLOT("Arg - plot", "plot"),
     ARG_PLOT_DEED("Arg - plot deed", "plot deed"),
-
     WARN_NOT_PERMITTED("Warn - no permission", "You do not have permission for this command."),
     WARN_PLOT_LIMIT("Warn - plot limit", "You have reached your plot limit."),
     WARN_NOT_FRIEND("Warn - not friend", "%player% is not trusted by %plot%."),
@@ -90,7 +85,6 @@ public enum Language {
     WARN_NO_UNLOCKED_PLOTS("Warn - no unlocked plots", "You can only write deeds for unlocked plots."),
     WARN_NO_DELETE_REQUESTS("Warn - no delete requests", "You do not have any pending plot deletion requests."),
     WARN_NO_PVP_ZONE("Warn - no pvp zone", "Combat is not allowed in this region."),
-
     SUCCESS_PLOT_UPGRADE("Success - plot upgrade", "%plot% was upgraded."),
     SUCCESS_PLOT_DOWNGRADE("Success - plot downgrade", "Plot %plot% was downgraded."),
     SUCCESS_PLOT_RENAME("Success - plot rename", "Plot successfully renamed to %plot%."),
@@ -105,32 +99,26 @@ public enum Language {
     SUCCESS_ITEMS_SENT("Success - items sent", "%amount% items sent to %player%"),
     SUCCESS_SPAWN_SET("Success - spawn set", "Spawn point set."),
     SUCCESS_WRITE_DEED("Success - write deed", "You wrote %amount% plot deeds."),
-
     MISC_HERE("Misc - here", "here"),
     MISC_FORMAT("Misc - format", "Format is %format%"),
     MISC_ONE_USE("Misc - one use", "1 use only - click to activate"),
     MISC_PLOT_DEED_LORE("Misc - plot deed lore", "a serious looking piece of paper"),
     MISC_OPTIONAL("Misc - optional", "optional"),
     MISC_VARIABLE("Misc - variable", "variable"),
-
     STATUS_REGION_OCCUPIED("Status - region occupied", "Another region is too close. Your plot would overlap."),
     STATUS_INVALID_WORLD("Status - invalid world", "You cannot claim a plot in this world"),
     STATUS_SPECIAL_CHARACTERS("Status - name special characters", "Plot names must consist of only a-z, A-Z, 0-9, _, and -"),
     STATUS_TOO_LONG("Status - name too long", "Plot names must be 20 characters or less"),
     STATUS_NAME_TAKEN("Status - name taken", "You already have a plot with that name"),
     STATUS_RESERVED_NAME("Status - reserved name", "That name is reserved by Player Plot"),
-
     INFO_CONFIRM_DELETE("Info - confirm delete", "Delete %player%'s plot? [confirm] [cancel]"),
     INFO_CONFIRM_DELETE_LEGACY("Info - confirm delete legacy", "Delete %player%'s plot?"),
     INFO_CONFIRM_DELETE_LEGACY_TIP("Info - confirm delete legacy tip", "Use [confirm] or [cancel]."),
     INFO_CONFIRM_HOVER("Info - hover confirm", "» Click to confirm"),
     INFO_CANCEL_HOVER("Info - hover cancel", "» Click to cancel"),
     INFO_REQUEST_DURATION("Info - request duration", "The request is valid for %seconds% seconds."),
-
     SCANNER_PLOT_OVERVIEW("Scanner - plot overview", "&5&l%plot% &d~ %player% ~"),
-    SCANNER_NO_PLOTS("Scanner - no plots", "No plots detected."),
-
-    ;
+    SCANNER_NO_PLOTS("Scanner - no plots", "No plots detected."),;
 
     public static void load() {
         File file = new File("plugins/PlayerPlot/Locale", PluginConfig.getLanguageFile() + ".yml");
@@ -263,20 +251,12 @@ public enum Language {
 
         TextComponent confirmComponent = new TextComponent("[" + Language.LABEL_CONFIRM.toString() + "]");
         confirmComponent.setColor(ChatColor.GREEN.asBungee());
-        if (Version.getValue() >= 116.2) {
-            confirmComponent.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new Text(ChatColor.GREEN + Language.INFO_CONFIRM_HOVER.toString())));
-        } else {
-            confirmComponent.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(Language.INFO_CONFIRM_HOVER.toString()).color(ChatColor.GREEN.asBungee()).create()));
-        }
+        confirmComponent.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new Text(ChatColor.GREEN + Language.INFO_CONFIRM_HOVER.toString())));
         confirmComponent.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, confirmCommand));
 
         TextComponent cancelComponent = new TextComponent("[" + Language.LABEL_CANCEL.toString() + "]");
         cancelComponent.setColor(ChatColor.RED.asBungee());
-        if (Version.getValue() >= 116.2) {
-            cancelComponent.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new Text(ChatColor.RED + Language.INFO_CANCEL_HOVER.toString())));
-        } else {
-            cancelComponent.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(Language.INFO_CANCEL_HOVER.toString()).color(ChatColor.RED.asBungee()).create()));
-        }
+        cancelComponent.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new Text(ChatColor.RED + Language.INFO_CANCEL_HOVER.toString())));
         cancelComponent.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, cancelCommand));
 
         TextComponent playerComponent = new TextComponent(playerName);
@@ -304,22 +284,25 @@ public enum Language {
                     playerSub.setColor(baseColor.asBungee());
 
                     cancelSub.addExtra(playerSub);
-                    if (k < playerSubs.length - 1 || cancelSubs[j].endsWith("%player%"))
+                    if (k < playerSubs.length - 1 || cancelSubs[j].endsWith("%player%")) {
                         cancelSub.addExtra(playerComponent);
+                    }
 
                 }
 
                 confirmSub.addExtra(cancelSub);
-                if (j < cancelSubs.length - 1 || confirmSubs[i].endsWith("[cancel]"))
+                if (j < cancelSubs.length - 1 || confirmSubs[i].endsWith("[cancel]")) {
                     confirmSub.addExtra(cancelComponent);
+                }
 
             }
 
             base.addExtra(confirmSub);
-            if (i < confirmSubs.length - 1 || string.endsWith("[confirm]")) base.addExtra(confirmComponent);
+            if (i < confirmSubs.length - 1 || string.endsWith("[confirm]")) {
+                base.addExtra(confirmComponent);
+            }
 
         }
-
 
         return base;
     }

@@ -3,20 +3,15 @@ package me.sword7.playerplot.plot;
 import me.sword7.playerplot.PlayerPlot;
 import me.sword7.playerplot.config.Language;
 import me.sword7.playerplot.config.PluginConfig;
-import me.sword7.playerplot.config.Version;
 import me.sword7.playerplot.util.ProtectionUtil;
-import me.sword7.playerplot.util.X.XMaterial;
-import me.sword7.playerplot.util.X.XSound;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Particle;
 import org.bukkit.block.Block;
-import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
-import org.bukkit.event.block.*;
 import org.bukkit.event.entity.EntityChangeBlockEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityExplodeEvent;
@@ -27,8 +22,22 @@ import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.util.Vector;
-
 import java.util.List;
+import org.bukkit.Sound;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Player;
+import org.bukkit.entity.Projectile;
+import org.bukkit.entity.Villager;
+import org.bukkit.event.block.Action;
+import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.block.BlockBurnEvent;
+import org.bukkit.event.block.BlockExplodeEvent;
+import org.bukkit.event.block.BlockFromToEvent;
+import org.bukkit.event.block.BlockIgniteEvent;
+import org.bukkit.event.block.BlockPistonExtendEvent;
+import org.bukkit.event.block.BlockPistonRetractEvent;
+import org.bukkit.event.block.BlockPlaceEvent;
 
 public class ProtectionListener implements Listener {
 
@@ -52,14 +61,17 @@ public class ProtectionListener implements Listener {
 
     private static void sendWarning(Player player, String message) {
         sendErrorEffect(player, player.getLocation());
-        if (PluginConfig.isWarnMessage()) player.sendMessage(message);
+        if (PluginConfig.isWarnMessage()) {
+            player.sendMessage(message);
+        }
     }
-
 
     private static void sendWarning(Player player, String message, Entity entity) {
         Location location = entity.getLocation().add(0, entity.getHeight() / 2.0, 0);
         sendErrorEffect(player, location);
-        if (PluginConfig.isWarnMessage()) player.sendMessage(message);
+        if (PluginConfig.isWarnMessage()) {
+            player.sendMessage(message);
+        }
     }
 
     private static void sendWarning(Player player, String message, Block block) {
@@ -74,12 +86,14 @@ public class ProtectionListener implements Listener {
             location.add(0, 1.3, 0);
         }
         sendErrorEffect(player, location);
-        if (PluginConfig.isWarnMessage()) player.sendMessage(message);
+        if (PluginConfig.isWarnMessage()) {
+            player.sendMessage(message);
+        }
     }
 
     private static void sendErrorEffect(Player player, Location location) {
         if (PluginConfig.isWarnSound()) {
-            player.playSound(location, XSound.ENTITY_BLAZE_HURT.parseSound(), 1f, 0.7f);
+            player.playSound(location, Sound.ENTITY_BLAZE_HURT, 1f, 0.7f);
         }
         if (PluginConfig.isWarnParticle()) {
             location.getWorld().spawnParticle(Particle.SMOKE_NORMAL, location, 2, 0, 0, 0, 0.05);
@@ -90,7 +104,7 @@ public class ProtectionListener implements Listener {
     @EventHandler(priority = EventPriority.LOWEST)
     public void onPiston(BlockPistonExtendEvent e) {
         Block piston = e.getBlock();
-        Vector direction = Version.isLegacy() ? getDirection(piston) : e.getDirection().getDirection();
+        Vector direction = e.getDirection().getDirection();
         Plot pistonPlot = PlotCache.getPlot(piston.getLocation());
         for (Block block : e.getBlocks()) {
             Plot blockPlot = PlotCache.getPlot(block.getLocation().add(direction.getX(), 0, direction.getZ()));
@@ -101,12 +115,11 @@ public class ProtectionListener implements Listener {
         }
     }
 
-
     @Deprecated
     @EventHandler(priority = EventPriority.LOWEST)
     public void onPistonRetract(BlockPistonRetractEvent e) {
         Block piston = e.getBlock();
-        Vector direction = Version.isLegacy() ? getDirection(piston) : e.getDirection().getDirection();
+        Vector direction = e.getDirection().getDirection();
         direction.multiply(-1);
         Plot pistonPlot = PlotCache.getPlot(piston.getLocation());
         for (Block block : e.getBlocks()) {
@@ -155,7 +168,6 @@ public class ProtectionListener implements Listener {
 
     }
 
-
     @EventHandler(priority = EventPriority.LOWEST)
     public void onBreak(BlockBreakEvent e) {
         Player breaker = e.getPlayer();
@@ -203,7 +215,7 @@ public class ProtectionListener implements Listener {
                 }
             }
         } else if (action == Action.PHYSICAL) {
-            if (blockMaterial == farmMaterial) {
+            if (blockMaterial == Material.FARMLAND) {
                 if (!isAllowed(e.getPlayer(), block.getLocation())) {
                     e.setCancelled(true);
                     sendWarning(player, PROTECTED_WARNING, block);
@@ -261,13 +273,11 @@ public class ProtectionListener implements Listener {
         }
     }
 
-    private Material farmMaterial = XMaterial.FARMLAND.parseMaterial();
-
     @EventHandler(priority = EventPriority.LOWEST)
     public void onEntityInteract(EntityInteractEvent e) {
         if (!(e.getEntity() instanceof Villager)) {
             Block block = e.getBlock();
-            if (block.getType() == farmMaterial) {
+            if (block.getType() == Material.FARMLAND) {
                 if (PlotCache.hasPlot(block.getLocation())) {
                     e.setCancelled(true);
                 }
@@ -318,6 +328,5 @@ public class ProtectionListener implements Listener {
             return null;
         }
     }
-
 
 }

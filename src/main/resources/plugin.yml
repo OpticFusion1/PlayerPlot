@@ -1,12 +1,11 @@
 name: PlayerPlot
-version: 1.20.0
+version: ${project.version}
 main: me.sword7.playerplot.PlayerPlot
-api-version: 1.13
-authors: [ sword7 ]
+api-version: 1.19
+authors: [ "Optic_Fusion1", "sword7" ]
 description: A plugin that adds protected areas for player use.
-website: https://linktr.ee/devsword7
 load: POSTWORLD
-softdepend: [ dynmap ]
+softdepend: ["dynmap"]
 
 commands:
   pplot:

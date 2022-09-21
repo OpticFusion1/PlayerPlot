@@ -38,7 +38,9 @@ public class DatabaseConnection {
     public static void shutdown() {
         keepAlive.cancel();
         try {
-            if (connection != null && !connection.isClosed()) connection.close();
+            if (connection != null && !connection.isClosed()) {
+                connection.close();
+            }
         } catch (SQLException e) {
             //do nothing
         }
@@ -46,12 +48,13 @@ public class DatabaseConnection {
 
     public void openConnection() throws SQLException, ClassNotFoundException {
         synchronized (this) {
-            if (connection != null && !connection.isClosed()) return;
+            if (connection != null && !connection.isClosed()) {
+                return;
+            }
             Class.forName("com.mysql.jdbc.Driver");
             connection = DriverManager.getConnection("jdbc:mysql://" + this.host + ":" + this.port + "/" + this.database + "?useSSL=" + ssl, this.username, this.password);
         }
     }
-
 
     public Connection getConnection() {
         return connection;
@@ -76,6 +79,5 @@ public class DatabaseConnection {
             }
         }
     }
-
 
 }

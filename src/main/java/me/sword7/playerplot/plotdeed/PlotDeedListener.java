@@ -2,11 +2,9 @@ package me.sword7.playerplot.plotdeed;
 
 import me.sword7.playerplot.PlayerPlot;
 import me.sword7.playerplot.config.PluginConfig;
-import me.sword7.playerplot.config.Version;
 import me.sword7.playerplot.user.UserCache;
 import me.sword7.playerplot.user.UserData;
 import me.sword7.playerplot.util.PermInfo;
-import me.sword7.playerplot.util.X.XSound;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -23,6 +21,7 @@ import org.bukkit.plugin.Plugin;
 import java.util.UUID;
 
 import static me.sword7.playerplot.config.Language.WARN_PLOT_MAX;
+import org.bukkit.Sound;
 
 public class PlotDeedListener implements Listener {
 
@@ -46,40 +45,12 @@ public class PlotDeedListener implements Listener {
                     if ((availablePlots < permInfo.getPlotMax())) {
                         userData.unlockPlot();
                         player.sendMessage(ChatColor.LIGHT_PURPLE + "+1 plot");
-                        if (XSound.ITEM_BOOK_PAGE_TURN.isSupported()) {
-                            player.playSound(player.getLocation(), XSound.ITEM_BOOK_PAGE_TURN.parseSound(), 2f, 1f);
-                        }
-                        consumeItem(player, itemStack);
+                        player.playSound(player.getLocation(), Sound.ITEM_BOOK_PAGE_TURN, 2f, 1f);
+                        itemStack.setAmount(itemStack.getAmount() - 1);
                     } else {
                         player.sendMessage(ChatColor.RED + WARN_PLOT_MAX.toString());
                     }
                 }
-            }
-        }
-    }
-
-    @Deprecated
-    private void consumeItem(Player player, ItemStack itemStack) {
-        if (Version.isNormalItemConsume()) {
-            itemStack.setAmount(itemStack.getAmount() - 1);
-        } else {
-            if (Version.hasOffhand()) {
-                ItemStack toSet = itemStack.getAmount() > 1 ? new ItemStack(itemStack.getType(), itemStack.getAmount() - 1) : null;
-                if (toSet != null) {
-                    toSet.setItemMeta(itemStack.getItemMeta());
-                }
-                PlayerInventory playerInventory = player.getInventory();
-                if (itemStack.equals(playerInventory.getItemInMainHand())) {
-                    playerInventory.setItemInMainHand(toSet);
-                } else if (itemStack.equals(playerInventory.getItemInOffHand())) {
-                    playerInventory.setItemInOffHand(toSet);
-                }
-            } else {
-                ItemStack toSet = itemStack.getAmount() > 1 ? new ItemStack(itemStack.getType(), itemStack.getAmount() - 1) : null;
-                if (toSet != null) {
-                    toSet.setItemMeta(itemStack.getItemMeta());
-                }
-                player.setItemInHand(toSet);
             }
         }
     }

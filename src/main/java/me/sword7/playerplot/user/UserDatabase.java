@@ -20,11 +20,11 @@ public class UserDatabase {
         try {
             databaseConnection.openConnection();
             Statement statement = databaseConnection.getConnection().createStatement();
-            statement.executeUpdate("CREATE TABLE IF NOT EXISTS PUser (" +
-                    "uuid CHAR(36)," +
-                    "unlockedPlots INT(4) DEFAULT 0," +
-                    "PRIMARY KEY (uuid)" +
-                    ");");
+            statement.executeUpdate("CREATE TABLE IF NOT EXISTS PUser ("
+                    + "uuid CHAR(36),"
+                    + "unlockedPlots INT(4) DEFAULT 0,"
+                    + "PRIMARY KEY (uuid)"
+                    + ");");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -74,12 +74,11 @@ public class UserDatabase {
         int unlockedPlots = userData.getUnlockedPlots();
         try {
             databaseConnection.openConnection();
-            databaseConnection.getConnection().createStatement().executeUpdate("REPLACE INTO PUser (uuid, unlockedPlots)" +
-                    "VALUES ('" + playerID + "', " + unlockedPlots + ");");
+            databaseConnection.getConnection().createStatement().executeUpdate("REPLACE INTO PUser (uuid, unlockedPlots)"
+                    + "VALUES ('" + playerID + "', " + unlockedPlots + ");");
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
 
 }

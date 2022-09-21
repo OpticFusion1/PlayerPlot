@@ -110,8 +110,12 @@ public class CommandLoot implements CommandExecutor {
 
     private int getCleanedAmount(String validIntString) {
         int amount = Integer.parseInt(validIntString);
-        if (amount < 0) amount = 0;
-        if (amount > 255) amount = 255;
+        if (amount < 0) {
+            amount = 0;
+        }
+        if (amount > 255) {
+            amount = 255;
+        }
         return amount;
     }
 

@@ -76,7 +76,6 @@ public class PluginConfig {
         load();
     }
 
-
     private static void load() {
         File file = new File("plugins/PlayerPlot", "config.yml");
         if (file.exists()) {
@@ -146,7 +145,6 @@ public class PluginConfig {
     public static boolean isAllowedPlotWorld(World world) {
         return world != null && !blacklistWorlds.contains(world.getName());
     }
-
 
     public static boolean isWarnParticle() {
         return warnParticle;

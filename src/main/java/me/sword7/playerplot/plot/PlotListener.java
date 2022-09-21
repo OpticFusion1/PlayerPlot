@@ -24,7 +24,6 @@ public class PlotListener implements Listener {
         }
     }
 
-
     @EventHandler
     public void onDeath(PlayerDeathEvent e) {
         UUID playerId = e.getEntity().getUniqueId();
@@ -32,6 +31,5 @@ public class PlotListener implements Listener {
             PlotBeam.getBeam(playerId).endNaturally();
         }
     }
-
 
 }

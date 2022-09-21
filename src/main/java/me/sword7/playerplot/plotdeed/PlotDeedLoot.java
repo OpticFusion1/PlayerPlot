@@ -8,7 +8,6 @@ import java.util.List;
 
 public class PlotDeedLoot implements ILoot {
 
-
     @Override
     public ItemStack valueOf(String s) throws Exception {
         try {

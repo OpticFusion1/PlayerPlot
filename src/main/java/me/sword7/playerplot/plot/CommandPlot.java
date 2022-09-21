@@ -8,8 +8,6 @@ import me.sword7.playerplot.config.PluginConfig;
 import me.sword7.playerplot.integration.Dynmap;
 import me.sword7.playerplot.user.UserCache;
 import me.sword7.playerplot.user.UserData;
-import me.sword7.playerplot.util.*;
-import me.sword7.playerplot.util.X.XSound;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -17,11 +15,18 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
+import me.sword7.playerplot.util.Friend;
+import me.sword7.playerplot.util.Help;
+import me.sword7.playerplot.util.InfoList;
+import me.sword7.playerplot.util.PermInfo;
+import me.sword7.playerplot.util.PlotPoint;
+import me.sword7.playerplot.util.PlotUtil;
+import me.sword7.playerplot.util.Scheduler;
+import org.bukkit.Sound;
 
 public class CommandPlot implements CommandExecutor {
 
@@ -109,6 +114,7 @@ public class CommandPlot implements CommandExecutor {
     }
 
     private interface IPlotAction {
+
         void run(Plot plot, String[] args);
     }
 
@@ -149,9 +155,7 @@ public class CommandPlot implements CommandExecutor {
             int duration = args.length > 1 && (args[1].equalsIgnoreCase("-long") || args[1].equalsIgnoreCase("-l")) ? 30 : 6;
             Plot plot = PlotCache.getPlot(player.getLocation());
             if (plot != null) {
-                if (XSound.BLOCK_BEACON_POWER_SELECT.isSupported()) {
-                    player.playSound(player.getLocation(), XSound.BLOCK_BEACON_POWER_SELECT.parseSound(), 1f, 0.77f);
-                }
+                player.playSound(player.getLocation(), Sound.BLOCK_BEACON_POWER_SELECT, 1f, 0.77f);
                 player.sendMessage(Language.SCANNER_PLOT_OVERVIEW.fromPlayerAndPlot(plot.getOwnerName(), plot.getName()));
                 PlotScanner.showPlot(player, plot, duration);
             } else {
@@ -198,10 +202,10 @@ public class CommandPlot implements CommandExecutor {
                         PlotCache.registerPlot(plot);
                         player.sendMessage(Language.SUCCESS_PLOT_CLAIM.coloredFromPlot(plot.getName(), ChatColor.LIGHT_PURPLE, ChatColor.DARK_PURPLE));
                         PlotScanner.showPlot(player, plot, 7);
-                        if (usingDynmap) dynmap.registerPlot(plot);
-                        if (XSound.BLOCK_BEACON_ACTIVATE.isSupported()) {
-                            player.playSound(player.getLocation(), XSound.BLOCK_BEACON_ACTIVATE.parseSound(), 1f, 1f);
+                        if (usingDynmap) {
+                            dynmap.registerPlot(plot);
                         }
+                        player.playSound(player.getLocation(), Sound.BLOCK_BEACON_ACTIVATE, 1f, 1f);
                     } else {
                         player.sendMessage(ChatColor.RED + nameStatus.getMessage());
                     }
@@ -220,11 +224,11 @@ public class CommandPlot implements CommandExecutor {
         if (Permissions.canPlotFree(player)) {
             PlotScanner.showPlot(player, plot, 1);
             PlotCache.removePlot(plot);
-            if (usingDynmap) dynmap.deletePlot(plot);
-            player.sendMessage(Language.SUCCESS_PLOT_FREE.coloredFromPlot(plot.getName(), ChatColor.LIGHT_PURPLE, ChatColor.DARK_PURPLE));
-            if (XSound.BLOCK_BEACON_DEACTIVATE.isSupported()) {
-                player.playSound(player.getLocation(), XSound.BLOCK_BEACON_DEACTIVATE.parseSound(), 1f, 1f);
+            if (usingDynmap) {
+                dynmap.deletePlot(plot);
             }
+            player.sendMessage(Language.SUCCESS_PLOT_FREE.coloredFromPlot(plot.getName(), ChatColor.LIGHT_PURPLE, ChatColor.DARK_PURPLE));
+            player.playSound(player.getLocation(), Sound.BLOCK_BEACON_DEACTIVATE, 1f, 1f);
         } else {
             player.sendMessage(ChatColor.RED + Language.WARN_NOT_PERMITTED.toString());
         }
@@ -241,8 +245,8 @@ public class CommandPlot implements CommandExecutor {
             PermInfo permInfo = UserCache.getPerms(playerID);
             int used = PlotCache.getPlayerPlotsUsed(playerID);
             int capacity = PluginConfig.getStartingPlotNum() + userData.getUnlockedPlots() + permInfo.getPlotBonus();
-            String title = ChatColor.LIGHT_PURPLE.toString() + ChatColor.BOLD + Language.LABEL_PLOTS.toString() +
-                    " (" + ChatColor.AQUA + ChatColor.BOLD + used + ChatColor.LIGHT_PURPLE + ChatColor.BOLD + "/" + capacity + "): ";
+            String title = ChatColor.LIGHT_PURPLE.toString() + ChatColor.BOLD + Language.LABEL_PLOTS.toString()
+                    + " (" + ChatColor.AQUA + ChatColor.BOLD + used + ChatColor.LIGHT_PURPLE + ChatColor.BOLD + "/" + capacity + "): ";
             InfoList infoList = new InfoList(title, items, 7);
             int page = args.length > 1 ? PlotUtil.parseAmount(args[1]) : 1;
             infoList.displayTo(player, page);
@@ -329,16 +333,16 @@ public class CommandPlot implements CommandExecutor {
                 Validation.RegionStatus regionStatus = Validation.canPlotBeUpgradedAt(plot.getWorld(), center, newSideLength, plot.getID());
                 if (regionStatus == Validation.RegionStatus.VALID) {
                     PlotScanner.showPlot(player, plot, 1);
-                    if (XSound.BLOCK_BEACON_ACTIVATE.isSupported()) {
-                        player.playSound(player.getLocation(), XSound.BLOCK_BEACON_ACTIVATE.parseSound(), 1, 1);
-                    }
+                    player.playSound(player.getLocation(), Sound.BLOCK_BEACON_ACTIVATE, 1, 1);
                     PlotPoint newMin = center.getMinCorner(newSideLength);
                     PlotPoint newMax = center.getMaxCorner(newSideLength);
                     plot.setRegion(newMin, newMax);
                     plot.incrementComponents();
                     PlotCache.touch(plot);
 
-                    if (usingDynmap) dynmap.updateMarker(plot);
+                    if (usingDynmap) {
+                        dynmap.updateMarker(plot);
+                    }
 
                     Scheduler.runLater(() -> {
                         PlotScanner.showPlot(player, plot, 7);
@@ -356,25 +360,25 @@ public class CommandPlot implements CommandExecutor {
         }
     }
 
-
     private void processDowngrade(Player player, Plot plot) {
         if (Permissions.canPlotDowngrade(player)) {
             PlotPoint center = plot.getCenter();
             int newSideLength = PlotUtil.getDowngradeLength(plot.getComponents());
             if (newSideLength >= PluginConfig.getPlotUnitSideLength()) {
                 PlotScanner.showPlot(player, plot, 1);
-                if (XSound.BLOCK_BEACON_DEACTIVATE.isSupported()) {
-                    player.playSound(player.getLocation(), XSound.BLOCK_BEACON_DEACTIVATE.parseSound(), 1f, 1f);
-                }
-
+                player.playSound(player.getLocation(), Sound.BLOCK_BEACON_DEACTIVATE, 1f, 1f);
                 PlotPoint newMin = center.getMinCorner(newSideLength);
                 PlotPoint newMax = center.getMaxCorner(newSideLength);
                 plot.setRegion(newMin, newMax);
                 plot.decrementComponents();
-                if (!plot.contains(plot.getSpawn())) plot.removeSpawn();
+                if (!plot.contains(plot.getSpawn())) {
+                    plot.removeSpawn();
+                }
                 PlotCache.touch(plot);
 
-                if (usingDynmap) dynmap.updateMarker(plot);
+                if (usingDynmap) {
+                    dynmap.updateMarker(plot);
+                }
 
                 Scheduler.runLater(() -> {
                     PlotScanner.showPlot(player, plot, 7);
@@ -396,13 +400,16 @@ public class CommandPlot implements CommandExecutor {
                 PlotCache.unassignFromZones(plot);
                 plot.setCenter(location);
                 PlotCache.assignToZones(plot);
-                if (!plot.contains(plot.getSpawn())) plot.removeSpawn();
+                if (!plot.contains(plot.getSpawn())) {
+                    plot.removeSpawn();
+                }
                 PlotCache.touch(plot);
                 player.sendMessage(Language.SUCCESS_PLOT_CENTER.coloredFromPlot(plot.getName(), ChatColor.LIGHT_PURPLE, ChatColor.DARK_PURPLE));
                 PlotScanner.showPlot(player, plot, 7);
-                if (usingDynmap) dynmap.updatePlot(plot);
-                if (XSound.BLOCK_BEACON_ACTIVATE.isSupported())
-                    player.playSound(location, XSound.BLOCK_BEACON_ACTIVATE.parseSound(), 1f, 1f);
+                if (usingDynmap) {
+                    dynmap.updatePlot(plot);
+                }
+                player.playSound(location, Sound.BLOCK_BEACON_ACTIVATE, 1f, 1f);
             } else {
                 player.sendMessage(ChatColor.RED + regionStatus.getMessage());
             }
@@ -438,7 +445,9 @@ public class CommandPlot implements CommandExecutor {
                 if (nameStatus == Validation.NameStatus.VALID) {
                     plot.setName(newName);
                     PlotCache.touch(plot);
-                    if (usingDynmap) dynmap.updatePlot(plot);
+                    if (usingDynmap) {
+                        dynmap.updatePlot(plot);
+                    }
                     player.sendMessage(Language.SUCCESS_PLOT_RENAME.coloredFromPlot(newName, ChatColor.LIGHT_PURPLE, ChatColor.DARK_PURPLE));
                 } else {
                     player.sendMessage(ChatColor.RED + nameStatus.getMessage());

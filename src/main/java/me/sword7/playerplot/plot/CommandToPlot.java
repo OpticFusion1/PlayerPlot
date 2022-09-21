@@ -20,9 +20,9 @@ public class CommandToPlot implements CommandExecutor {
                     Plot targetPlot = PlotCache.getPlayerPlot(player.getUniqueId(), args[0]);
                     if (targetPlot != null) {
                         Location targetLoc = targetPlot.getSpawn();
-                        if(targetLoc != null){
+                        if (targetLoc != null) {
                             new PlotBeam(player, targetLoc);
-                        } else{
+                        } else {
                             player.sendMessage(Language.WARN_PLOT_NOT_FOUND.coloredFromPlot(args[0], ChatColor.RED, ChatColor.DARK_RED));
                         }
                     } else {

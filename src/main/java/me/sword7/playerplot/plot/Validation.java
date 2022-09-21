@@ -31,8 +31,7 @@ public class Validation {
         SPECIAL_CHARACTERS(Language.STATUS_SPECIAL_CHARACTERS.toString()),
         TOO_LONG(Language.STATUS_TOO_LONG.toString()),
         NAME_TAKEN(Language.STATUS_NAME_TAKEN.toString()),
-        RESERVED_NAME(Language.STATUS_RESERVED_NAME.toString()),
-        ;
+        RESERVED_NAME(Language.STATUS_RESERVED_NAME.toString()),;
 
         NameStatus(String message) {
             this.message = message;
@@ -62,7 +61,7 @@ public class Validation {
 
     public static RegionStatus canPlotBeUpgradedAt(String world, PlotPoint center, int sideLength, UUID selfID) {
         Location centerLoc = center.asLocationParts(world).getLocation();
-        if(centerLoc != null){
+        if (centerLoc != null) {
             if (!PluginConfig.isAllowedPlotWorld(centerLoc.getWorld())) {
                 return RegionStatus.INVALID_WORLD;
             } else if (overlapsPlayerPlot(centerLoc, sideLength, selfID)) {
@@ -77,7 +76,6 @@ public class Validation {
         }
     }
 
-
     public static boolean overlapsPlayerPlot(Location center, int sideLength, UUID selfID) {
         for (Plot plot : PlotCache.getPlotsNear(center, sideLength)) {
             if (!plot.getID().equals(selfID)) {
@@ -86,7 +84,9 @@ public class Validation {
                 PlotPoint[] targetCorners = PlotPoint.fromLocation(center).getCorners(sideLength);
                 PlotPoint[] biggerPoints = existingPlotBigger ? existingCorners : targetCorners;
                 PlotPoint[] smallerPoints = existingPlotBigger ? targetCorners : existingCorners;
-                if (overlaps(biggerPoints, smallerPoints)) return true;
+                if (overlaps(biggerPoints, smallerPoints)) {
+                    return true;
+                }
             }
         }
 
@@ -116,7 +116,6 @@ public class Validation {
         return (withinXRange && withinZRange);
     }
 
-
     public enum RegionStatus {
 
         VALID(""),
@@ -134,6 +133,5 @@ public class Validation {
         private final String message;
 
     }
-
 
 }

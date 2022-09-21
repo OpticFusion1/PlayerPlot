@@ -65,9 +65,9 @@ public class Permissions {
     }
 
     private static boolean hasAdminPermission(CommandSender sender, String permString) {
-        return sender.hasPermission("playerplot.*") ||
-                sender.hasPermission("playerplot.admin.*") ||
-                sender.hasPermission(permString);
+        return sender.hasPermission("playerplot.*")
+                || sender.hasPermission("playerplot.admin.*")
+                || sender.hasPermission(permString);
     }
 
     public static boolean canPlotScan(CommandSender sender) {
@@ -123,9 +123,9 @@ public class Permissions {
     }
 
     private static boolean hasPlotPermission(CommandSender sender, String permString) {
-        return sender.hasPermission("playerplot.*") ||
-                sender.hasPermission("playerplot.plot.*") ||
-                sender.hasPermission(permString);
+        return sender.hasPermission("playerplot.*")
+                || sender.hasPermission("playerplot.plot.*")
+                || sender.hasPermission(permString);
     }
 
     public static PermInfo getPermInfo(Player player) {
@@ -137,10 +137,14 @@ public class Permissions {
             try {
                 if (permString.startsWith("plot.bonus.")) {
                     int newBonus = Integer.parseInt(permString.split("plot\\.bonus\\.")[1]);
-                    if (newBonus > bonusPlots) bonusPlots = newBonus;
+                    if (newBonus > bonusPlots) {
+                        bonusPlots = newBonus;
+                    }
                 } else if (permString.startsWith("plot.cap.")) {
                     int newCap = Integer.parseInt(permString.split("plot\\.cap\\.")[1]);
-                    if (newCap > maxPlots) maxPlots = newCap;
+                    if (newCap > maxPlots) {
+                        maxPlots = newCap;
+                    }
                 }
             } catch (Exception e) {
                 //do nothing

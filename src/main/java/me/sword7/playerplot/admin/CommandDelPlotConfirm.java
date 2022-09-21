@@ -27,7 +27,9 @@ public class CommandDelPlotConfirm implements CommandExecutor {
                     Plot plot = DeleteRequests.getPending(player).getPlot();
                     DeleteRequests.remove(player);
                     PlotCache.removePlot(plot);
-                    if (usingDynmap) dynmap.deletePlot(plot);
+                    if (usingDynmap) {
+                        dynmap.deletePlot(plot);
+                    }
                     player.sendMessage(ChatColor.LIGHT_PURPLE + Language.SUCCESS_PLOT_DELETE.toString());
                 } else {
                     player.sendMessage(ChatColor.RED + Language.WARN_NO_DELETE_REQUESTS.toString());
@@ -39,6 +41,5 @@ public class CommandDelPlotConfirm implements CommandExecutor {
 
         return false;
     }
-
 
 }

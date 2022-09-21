@@ -1,19 +1,18 @@
 package me.sword7.playerplot.plot;
 
 import me.sword7.playerplot.PlayerPlot;
-import me.sword7.playerplot.util.Scheduler;
-import me.sword7.playerplot.util.X.XSound;
-import me.sword7.playerplot.util.border.Border;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
+import me.sword7.playerplot.util.Scheduler;
+import me.sword7.playerplot.util.border.Border;
+import org.bukkit.Sound;
 
 public class PlotBeam extends BukkitRunnable {
 
@@ -36,7 +35,6 @@ public class PlotBeam extends BukkitRunnable {
         }
     }
 
-    private static final XSound TELEPORT_SOUND = XSound.BLOCK_BEACON_POWER_SELECT;
     private static final Vector UP_VELOCITY = new Vector(0, 0.05, 0);
     private static final Vector DOWN_VELOCITY = new Vector(0, -0.05, 0);
 
@@ -47,7 +45,9 @@ public class PlotBeam extends BukkitRunnable {
 
     public PlotBeam(Player player, Location destination) {
         this.player = player;
-        if (player.getVehicle() != null) player.getVehicle().eject();
+        if (player.getVehicle() != null) {
+            player.getVehicle().eject();
+        }
         this.playerId = player.getUniqueId();
         this.destination = destination;
         this.frame = 0;
@@ -90,11 +90,8 @@ public class PlotBeam extends BukkitRunnable {
         cancel();
     }
 
-
     private static void playSound(Player player) {
-        if (TELEPORT_SOUND.isSupported()) {
-            player.playSound(player.getLocation(), TELEPORT_SOUND.parseSound(), 0.5f, 1.9f);
-        }
+        player.playSound(player.getLocation(), Sound.BLOCK_BEACON_POWER_SELECT, 0.5f, 1.9f);
     }
 
     private static void showBeam(Player player, int durationTicks) {
@@ -116,6 +113,5 @@ public class PlotBeam extends BukkitRunnable {
         }
         return loc;
     }
-
 
 }

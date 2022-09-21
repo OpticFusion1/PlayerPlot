@@ -77,7 +77,4 @@ public class PlotUtil {
         return attempt;
     }
 
-
-
-
 }

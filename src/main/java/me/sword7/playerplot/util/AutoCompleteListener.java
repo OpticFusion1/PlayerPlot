@@ -38,7 +38,9 @@ public class AutoCompleteListener implements Listener {
                     String root = "/playerplot";
                     List<String> completions = new ArrayList<>();
                     completions.addAll(PLUGIN_COMPLETIONS);
-                    if (Permissions.canReload(player)) completions.add("reload");
+                    if (Permissions.canReload(player)) {
+                        completions.add("reload");
+                    }
                     e.setCompletions(getRefinedCompletions(root, buffer, completions));
                 } else {
                     e.setCompletions(Collections.EMPTY_LIST);
@@ -154,7 +156,6 @@ public class AutoCompleteListener implements Listener {
             .add("setcenter")
             .add("setspawn")
             .build();
-
 
     private static final List<String> PLUGIN_COMPLETIONS = ImmutableList.<String>builder()
             .add("help")

@@ -1,6 +1,8 @@
 package me.sword7.playerplot.util.border;
 
-import me.sword7.playerplot.config.Version;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 import me.sword7.playerplot.plot.Plot;
 import me.sword7.playerplot.util.PlotPoint;
 import org.bukkit.Bukkit;
@@ -8,13 +10,10 @@ import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
-
 public class Border {
 
     private static Map<UUID, ClientBorder> playerToBorder = new HashMap<>();
+    private static final WorldBorder border = new WorldBorder();
 
     public static boolean hasBorder(UUID playerId) {
         return playerToBorder.containsKey(playerId);
@@ -29,45 +28,6 @@ public class Border {
             Border.hide(player);
         }
         playerToBorder.clear();
-    }
-
-    private static IBorder border = select();
-
-    public static IBorder select() {
-        switch (Version.getCurrent()) {
-            case v1_17_R1:
-                return new Border_v1_17_R1();
-            case v1_16_R3:
-                return new Border_v1_16_R3();
-            case v1_16_R2:
-                return new Border_v1_16_R2();
-            case v1_16_R1:
-                return new Border_v1_16_R1();
-            case v1_15_R1:
-                return new Border_v1_15_R1();
-            case v1_14_R1:
-                return new Border_v1_14_R1();
-            case v1_13_R2:
-                return new Border_v1_13_R2();
-            case v1_13_R1:
-                return new Border_v1_13_R1();
-            case v1_12_R1:
-                return new Border_v1_12_R1();
-            case v1_11_R1:
-                return new Border_v1_11_R1();
-            case v1_10_R1:
-                return new Border_v1_10_R1();
-            case v1_9_R2:
-                return new Border_v1_9_R2();
-            case v1_9_R1:
-                return new Border_v1_9_R1();
-            case v1_8_R3:
-                return new Border_v1_8_R3();
-            case v1_8_R2:
-                return new Border_v1_8_R2();
-            default:
-                return new Border_Unknown();
-        }
     }
 
     public static UUID showPlot(Player player, Plot plot) {

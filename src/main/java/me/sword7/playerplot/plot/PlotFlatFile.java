@@ -22,8 +22,8 @@ public class PlotFlatFile {
 
             PlotPoint minCorner = plot.getMinCorner();
             PlotPoint maxCorner = plot.getMaxCorner();
-            String baseString = plot.getName() + "=" + plot.getOwnerName() + "=" + plot.getOwnerID() + "=" +
-                    plot.getWorld() + "=" + minCorner.getX() + "_" + minCorner.getZ() + "<" + maxCorner.getX() + "_" + maxCorner.getZ() + "=" + plot.getComponents();
+            String baseString = plot.getName() + "=" + plot.getOwnerName() + "=" + plot.getOwnerID() + "="
+                    + plot.getWorld() + "=" + minCorner.getX() + "_" + minCorner.getZ() + "<" + maxCorner.getX() + "_" + maxCorner.getZ() + "=" + plot.getComponents();
             config.set(key + ".baseData", baseString);
 
             List<String> friendsList = new ArrayList<>();
@@ -106,6 +106,5 @@ public class PlotFlatFile {
             e.printStackTrace();
         }
     }
-
 
 }

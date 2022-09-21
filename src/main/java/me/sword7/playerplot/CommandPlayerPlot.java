@@ -2,14 +2,12 @@ package me.sword7.playerplot;
 
 import me.sword7.playerplot.config.Language;
 import me.sword7.playerplot.config.Permissions;
-import me.sword7.playerplot.config.Version;
 import me.sword7.playerplot.util.Help;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.PluginDescriptionFile;
-
 
 public class CommandPlayerPlot implements CommandExecutor {
 
@@ -57,12 +55,7 @@ public class CommandPlayerPlot implements CommandExecutor {
         sender.sendMessage(ChatColor.GRAY + Language.PLUGIN_DESCRIPTION.toString());
         sender.sendMessage("");
 
-        if (Version.hasBungeeChat()) {
-            sender.spigot().sendMessage(Language.PLUGIN_READ_MORE.getWithLink(ChatColor.GRAY, Language.PLUGIN_WIKI.toString(), "https://gitlab.com/sword7/playerplot/-/wikis/home"));
-        } else {
-            sender.sendMessage(ChatColor.GRAY + Language.PLUGIN_READ_MORE.toString().replaceAll("\\[link\\]", Language.PLUGIN_WIKI.toString()) +
-                    " " + ChatColor.AQUA + "https://gitlab.com/sword7/playerplot/-/wikis/home");
-        }
+        sender.spigot().sendMessage(Language.PLUGIN_READ_MORE.getWithLink(ChatColor.GRAY, Language.PLUGIN_WIKI.toString(), "https://gitlab.com/sword7/playerplot/-/wikis/home"));
         sender.sendMessage(ChatColor.DARK_PURPLE.toString() + ChatColor.BOLD + "------- " + Language.PLUGIN_OPTIONS + " -------");
         sender.sendMessage(ChatColor.LIGHT_PURPLE + "/playerplot help: " + ChatColor.WHITE + ChatColor.ITALIC + Language.HELP_PLAYERPLOT_HELP);
         sender.sendMessage(ChatColor.LIGHT_PURPLE + "/playerplot info: " + ChatColor.WHITE + ChatColor.ITALIC + Language.HELP_PLAYERPLOT_INFO);

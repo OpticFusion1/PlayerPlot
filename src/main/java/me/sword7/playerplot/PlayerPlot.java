@@ -4,9 +4,22 @@ import me.sword7.playerplot.admin.CommandAllPlots;
 import me.sword7.playerplot.admin.CommandDelPlot;
 import me.sword7.playerplot.admin.CommandDelPlotCancel;
 import me.sword7.playerplot.admin.CommandDelPlotConfirm;
-import me.sword7.playerplot.config.*;
-import me.sword7.playerplot.plot.*;
-import me.sword7.playerplot.plotdeed.*;
+import me.sword7.playerplot.config.ConfigLoader;
+import me.sword7.playerplot.config.Language;
+import me.sword7.playerplot.config.PluginBase;
+import me.sword7.playerplot.config.PluginConfig;
+import me.sword7.playerplot.plot.CommandPlot;
+import me.sword7.playerplot.plot.CommandToPlot;
+import me.sword7.playerplot.plot.PlotBeam;
+import me.sword7.playerplot.plot.PlotCache;
+import me.sword7.playerplot.plot.PlotListener;
+import me.sword7.playerplot.plot.PlotScanner;
+import me.sword7.playerplot.plot.ProtectionListener;
+import me.sword7.playerplot.plotdeed.CommandLoot;
+import me.sword7.playerplot.plotdeed.CommandWriteDeed;
+import me.sword7.playerplot.plotdeed.PlotDeedListener;
+import me.sword7.playerplot.plotdeed.PlotDeedLoot;
+import me.sword7.playerplot.plotdeed.PlotDeedType;
 import me.sword7.playerplot.user.UserCache;
 import me.sword7.playerplot.util.AutoCompleteListener;
 import me.sword7.playerplot.util.border.Border;
@@ -50,7 +63,7 @@ public final class PlayerPlot extends JavaPlugin {
         getCommand("delplotcancel").setExecutor(new CommandDelPlotCancel());
 
         //register listeners
-        if (Version.hasAutoComplete()) new AutoCompleteListener();
+        new AutoCompleteListener();
         new ProtectionListener();
         new PlotListener();
         new PlotDeedListener();
@@ -65,7 +78,9 @@ public final class PlayerPlot extends JavaPlugin {
         }
         UserCache.shutdown();
         PlotCache.shutdown();
-        if (PluginConfig.isUsingDatabase()) DatabaseConnection.shutdown();
+        if (PluginConfig.isUsingDatabase()) {
+            DatabaseConnection.shutdown();
+        }
         Border.shutdown();
         PlotBeam.shutdown();
     }
@@ -85,6 +100,5 @@ public final class PlayerPlot extends JavaPlugin {
     public PlayerPlotAPI getPlayerPlotAPI() {
         return playerPlotAPI;
     }
-
 
 }

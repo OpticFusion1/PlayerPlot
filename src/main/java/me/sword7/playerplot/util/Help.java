@@ -47,12 +47,18 @@ public class Help {
         int unlockedNum = userData.getUnlockedPlots();
         int capacity = startingNum + permNum + unlockedNum;
         player.sendMessage("");
-        player.sendMessage(ChatColor.LIGHT_PURPLE + "" + ChatColor.BOLD + Language.LABEL_PLOTS + ChatColor.ITALIC + "" +
-                ChatColor.DARK_PURPLE + " -  (" + used + "/" + ChatColor.AQUA + capacity + ChatColor.DARK_PURPLE + ")");
+        player.sendMessage(ChatColor.LIGHT_PURPLE + "" + ChatColor.BOLD + Language.LABEL_PLOTS + ChatColor.ITALIC + ""
+                + ChatColor.DARK_PURPLE + " -  (" + used + "/" + ChatColor.AQUA + capacity + ChatColor.DARK_PURPLE + ")");
         String capacityComponents = "";
-        if (startingNum > 0) capacityComponents += ChatColor.GRAY + "starting: " + ChatColor.AQUA + startingNum + " ";
-        if (unlockedNum > 0) capacityComponents += ChatColor.GRAY + "unlocked: " + ChatColor.AQUA + unlockedNum + " ";
-        if (permNum > 0) capacityComponents += ChatColor.GRAY + "permission: " + ChatColor.AQUA + permNum + " ";
+        if (startingNum > 0) {
+            capacityComponents += ChatColor.GRAY + "starting: " + ChatColor.AQUA + startingNum + " ";
+        }
+        if (unlockedNum > 0) {
+            capacityComponents += ChatColor.GRAY + "unlocked: " + ChatColor.AQUA + unlockedNum + " ";
+        }
+        if (permNum > 0) {
+            capacityComponents += ChatColor.GRAY + "permission: " + ChatColor.AQUA + permNum + " ";
+        }
         player.sendMessage(capacityComponents);
         player.sendMessage(ChatColor.DARK_PURPLE.toString() + ChatColor.BOLD + "------- " + Language.LABEL_COMMANDS + " -------");
         player.sendMessage(ChatColor.GRAY.toString() + "() = " + Language.MISC_OPTIONAL + "  " + ChatColor.DARK_PURPLE + "[] = " + Language.MISC_VARIABLE);
@@ -60,7 +66,6 @@ public class Help {
         player.sendMessage(ChatColor.DARK_PURPLE.toString() + ChatColor.BOLD + "------------------------");
         sendPlotActionCommands(player);
     }
-
 
     private static void sendCommand(CommandSender sender, String message) {
         sender.sendMessage(ChatColor.translateAlternateColorCodes('&', message));

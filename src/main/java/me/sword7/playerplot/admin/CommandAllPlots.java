@@ -49,5 +49,4 @@ public class CommandAllPlots implements CommandExecutor {
 
     }
 
-
 }

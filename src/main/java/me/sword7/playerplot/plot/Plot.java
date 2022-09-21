@@ -182,7 +182,6 @@ public class Plot {
         return ((minCorner.getZ() <= blockZ) && (blockZ <= maxCorner.getZ()));
     }
 
-
     public PlotPoint getMinCorner() {
         return minCorner;
     }

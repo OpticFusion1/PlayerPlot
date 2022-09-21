@@ -21,7 +21,6 @@ public class Friend {
         this.name = player.getName();
     }
 
-
     public UUID getUuid() {
         return uuid;
     }

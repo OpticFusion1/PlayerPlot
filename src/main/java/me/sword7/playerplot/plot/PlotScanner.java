@@ -2,17 +2,16 @@ package me.sword7.playerplot.plot;
 
 import me.sword7.playerplot.PlayerPlot;
 import me.sword7.playerplot.util.Scheduler;
-import me.sword7.playerplot.util.border.Border;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.plugin.Plugin;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
+import me.sword7.playerplot.util.border.Border;
 
 public class PlotScanner implements Listener {
 
