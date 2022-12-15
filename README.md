@@ -9,14 +9,14 @@
 <br/>
 <div align="center">
 
-  [![Player Plot](images/logo.png)](https://gitlab.com/sword7/playerplot)
+  [![Player Plot](images/logo.png)](https://github.com/OpticFusion1/PlayerPlot)
 
   ### Player Plot <br><sub>*Build without fear!*</sub>
-  **[Explore the docs »](https://gitlab.com/sword7/playerplot)**
+  **[Explore the docs »](https://github.com/OpticFusion1/PlayerPlot)**
   <br/>
-  [Report Bug](https://gitlab.com/sword7/playerplot/-/issues)
+  [Report Bug](https://github.com/OpticFusion1/PlayerPlot/issues)
   ·
-  [Request Feature](https://gitlab.com/sword7/playerplot/-/issues)
+  [Request Feature](https://github.com/OpticFusion1/PlayerPlot/issues)
   
 </div>
 
@@ -54,7 +54,7 @@ The plugin is also very user-friendly because any plot's border can be made visi
 <!-- GETTING STARTED -->
 ## Getting Started
 
-The latest version of Player Plot is available on [SpigotMC](https://www.spigotmc.org/resources/player-plot.68033/).
+The latest version of Player Plot is available on [SpigotMC](https://www.spigotmc.org/resources/player-plot.105387/).
 
 #### Prerequisites
 
@@ -64,7 +64,7 @@ Player Plot requires a Minecraft server running version 1.8 to 1.6.
 
 #### Installation
 
-Install Player Plot like any other Spigot plugin. If you need a refresher you can refer to [Installation](https://gitlab.com/sword7/playerplot/-/wikis/setup/installation).
+Install Player Plot like any other Spigot plugin. If you need a refresher you can refer to [Installation](https://github.com/OpticFusion1/PlayerPlot/wiki/setup/installation).
 
 <!-- USAGE EXAMPLES -->
 ## Usage
@@ -106,7 +106,7 @@ The plugin comes with an optional resource pack that adds custom textures to plo
 
 ![Plot Deed](images/plot-deed.png)
 
-You can download the resource pack [here](https://gitlab.com/sword7/playerplot/-/wikis/misc/resource-pack).
+You can download the resource pack [here](https://github.com/OpticFusion1/PlayerPlot/wiki/misc/resource-pack).
 
 #### Dynmap
 
@@ -114,7 +114,7 @@ Player Plot is compatible with dynmap. Configure the dynmap with the options in 
 
 ![Plot Deed](images/dynmap.png)
 
-_For more information, please refer to the [Documentation](https://gitlab.com/sword7/playerplot/-/wikis/home)._
+_For more information, please refer to the [Documentation](https://github.com/OpticFusion1/PlayerPlot/wiki/home)._
 
 <!-- CONTRIBUTING -->
 ## Contributing
@@ -133,7 +133,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 sword7 - devsword7@gmail.com
 
-Project Link: [https://gitlab.com/sword7/playerplot](https://gitlab.com/sword7/playerplot)
+Project Link: [https://gitlab.com/sword7/playerplot](https://github.com/OpticFusion1/PlayerPlot/playerplot)
 
 <!-- ACKNOWLEDGEMENTS -->
 ## Acknowledgements
@@ -143,12 +143,12 @@ Project Link: [https://gitlab.com/sword7/playerplot](https://gitlab.com/sword7/p
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[version-shield]: https://img.shields.io/spiget/version/68033?label=&labelColor=EE22EE&color=FF55FF
-[version-url]: https://www.spigotmc.org/resources/player-plot.68033/
-[download-shield]: https://img.shields.io/spiget/downloads/68033?&color=efb61c&style=flat-square&logo=image%2Fx-icon%3Bbase64%2CAAABAAEAEBAQAAAAAAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAND%2FAOhGOgA%2F6OIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAiAAAAAAAAACIAAAAAAAAAIgAAAAAAAAAAAAAAAAAAABEAAAAzMQABEQAAARMzEBERARERETMxERAAAAARMzEAAAAAAAETMwAAAAAAABEwAAAAAAAAERAAAAAAAAABAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAD%2F%2BQAA%2F%2FkAAP%2F5AAD%2F8AAA%2BDAAAPAgAAAAAAAAAAEAAAADAADwDwAA%2FB8AAPwfAAD8HwAA%2Fj8AAP4%2FAADwBwAA
-[download-url]: https://www.spigotmc.org/resources/player-plot.68033/
+[version-shield]: https://img.shields.io/spiget/version/105387?label=&labelColor=EE22EE&color=FF55FF
+[version-url]: https://www.spigotmc.org/resources/player-plot.105387/
+[download-shield]: https://img.shields.io/spiget/downloads/105387?&color=efb61c&style=flat-square&logo=image%2Fx-icon%3Bbase64%2CAAABAAEAEBAQAAAAAAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAND%2FAOhGOgA%2F6OIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAiAAAAAAAAACIAAAAAAAAAIgAAAAAAAAAAAAAAAAAAABEAAAAzMQABEQAAARMzEBERARERETMxERAAAAARMzEAAAAAAAETMwAAAAAAABEwAAAAAAAAERAAAAAAAAABAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAD%2F%2BQAA%2F%2FkAAP%2F5AAD%2F8AAA%2BDAAAPAgAAAAAAAAAAEAAAADAADwDwAA%2FB8AAPwfAAD8HwAA%2Fj8AAP4%2FAADwBwAA
+[download-url]: https://www.spigotmc.org/resources/player-plot.105387/
 [license-shield]: https://img.shields.io/badge/license-MIT-blue?style=flat-square
-[tested-shield]: https://img.shields.io/spiget/tested-versions/68033?style=flat-square
-[tested-url]: https://www.spigotmc.org/resources/player-plot.68033/
-[license-url]: https://gitlab.com/sword7/playerplot/-/blob/master/LICENSE
+[tested-shield]: https://img.shields.io/spiget/tested-versions/105387?style=flat-square
+[tested-url]: https://www.spigotmc.org/resources/player-plot.105387/
+[license-url]: https://github.com/OpticFusion1/PlayerPlot/blob/master/LICENSE
 [product-screenshot]: images/screenshot.png
